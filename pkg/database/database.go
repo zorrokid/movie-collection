@@ -3,6 +3,10 @@ package database
 import (
 	"fmt"
 
+	"github.com/zorrokid/movieCollection/pkg/models"
+
+	"github.com/zorrokid/movieCollection/pkg/database/env"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -10,7 +14,9 @@ import (
 // InitDB initialized the database connectio
 func InitDB() (*gorm.DB, error) {
 
-	dsn := "host=localhost port=5432 user=movies dbname=moviesdb password=movies123"
+	db := env.GetEnvDB()
+
+	dsn := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s", db.Host, db.Port, db.User, db.Database, db.Password)
 	// Connect to postgres database
 	DBCon, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
@@ -20,4 +26,9 @@ func InitDB() (*gorm.DB, error) {
 	}
 
 	return DBCon, err
+}
+
+// MigrateDB runs migrations to database
+func MigrateDB(db *gorm.DB) {
+	db.AutoMigrate(&models.Case{}, &models.Condition{}, &models.Status{}, &models.Compilation{})
 }
