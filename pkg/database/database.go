@@ -30,5 +30,5 @@ func InitDB() (*gorm.DB, error) {
 
 // MigrateDB runs migrations to database
 func MigrateDB(db *gorm.DB) {
-	db.AutoMigrate(&models.Case{}, &models.Condition{}, &models.Status{}, &models.Compilation{})
+	db.AutoMigrate(&models.CaseType{}, &models.Condition{}, &models.CollectionStatus{}, &models.Compilation{})
 }

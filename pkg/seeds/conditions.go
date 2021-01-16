@@ -5,11 +5,11 @@ import (
 	"gorm.io/gorm"
 )
 
-// CreateCondition seeds db with Condition-entry
-func CreateCondition(db *gorm.DB, names []string) error {
+// CreateConditions seeds db with Condition-entries
+func CreateConditions(db *gorm.DB, conditions []models.Condition) error {
 
-	for _, name := range names {
-		if err := db.Create(&models.Condition{Name: name}).Error; err != nil {
+	for _, condition := range conditions {
+		if err := db.Create(condition).Error; err != nil {
 			return err
 		}
 	}

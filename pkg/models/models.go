@@ -19,20 +19,48 @@ type Compilation struct {
 	IsRental      bool
 }
 
+type nonAutoIncrementModel struct {
+	ID uint `gorm:"primary_key;autoincrement:false"`
+}
+
 // Condition of the items in collection
 type Condition struct {
-	ID   int
+	ID   uint `gorm:"primary_key;autoincrement:false"`
 	Name string
 }
 
-// Case type of a collection item
-type Case struct {
-	ID   int
+// NewCondition constructs Condition object
+func NewCondition(id uint, name string) Condition {
+	return Condition{
+		ID:   id,
+		Name: name,
+	}
+}
+
+// CaseType type of a collection item
+type CaseType struct {
+	ID   uint `gorm:"primary_key;autoincrement:false"`
 	Name string
 }
 
-// Status of a collection item
-type Status struct {
-	ID   int
+// NewCaseType constructs Case object
+func NewCaseType(id uint, name string) CaseType {
+	return CaseType{
+		ID:   id,
+		Name: name,
+	}
+}
+
+// CollectionStatus of a collection item
+type CollectionStatus struct {
+	ID   uint `gorm:"primary_key;autoincrement:false"`
 	Name string
+}
+
+// NewCollectionStatus constructs Status object
+func NewCollectionStatus(id uint, name string) CollectionStatus {
+	return CollectionStatus{
+		ID:   id,
+		Name: name,
+	}
 }
