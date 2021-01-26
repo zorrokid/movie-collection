@@ -1,10 +1,11 @@
-package loader
+package cvsloader
 
 import (
 	"fmt"
 	"io/ioutil"
 
 	"github.com/jszwec/csvutil"
+	"github.com/zorrokid/movieCollection/pkg/models"
 )
 
 type csvRowEntry struct {
@@ -35,7 +36,7 @@ type csvRowEntry struct {
 }
 
 // LoadCollectionItems loads collection items from cvs file in given path
-func LoadCollectionItems(filePath string) error {
+func LoadCollectionItems(filePath string, dbConstants *models.DbConstants) error {
 	var csvRowEntries []csvRowEntry
 
 	csvInput, err := ioutil.ReadFile(filePath)
